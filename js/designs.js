@@ -1,6 +1,6 @@
 //Javascript for Memory Card Game
 
-function shuffle(array) {
+/*function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -12,23 +12,16 @@ function shuffle(array) {
     }
 
     return array;
-}
-
-
-var deck = document.querySelector('.deck');
-deck.addEventListener('click', function(event) {
-	event.preventDefault();
-	flipCard();
-	unmatchCard();
-	matchCard();
-});
-
-		function flipCard() {
-			card.classList.add('open');
-		}
+}*/
+ var deck = document.querySelector('.deck');
+ deck.addEventListener('click', flipCard, false);
+ 
+ function flipCard(evt) {
+		evt.target.classList.add('open', 'show');
+ }
 		
 
-			
+		
 		
 
 
