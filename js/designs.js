@@ -15,6 +15,22 @@ function shuffle(array) {
 }
 
 
+var deck = document.querySelector('.deck');
+deck.addEventListener('click', function(event) {
+	event.preventDefault();
+	flipCard();
+	unmatchCard();
+	matchCard();
+});
+
+		function flipCard() {
+			card.classList.add('open');
+		}
+		
+
+			
+		
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
