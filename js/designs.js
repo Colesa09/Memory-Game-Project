@@ -13,16 +13,30 @@
 
     return array;
 }*/
- var deck = document.querySelector('.deck');
- deck.addEventListener('click', flipCard, false);
- 
- function flipCard(evt) {
-		evt.target.classList.add('open', 'show');
- }
-		
 
+var card1, card2;
+var symbol;
+
+var deck = document.querySelector('.deck');
+deck.addEventListener('click', flipCard, false);
+
+function flipCard(evt) {
+	var card = evt.target;
+	card.classList.add('open', 'show');
+	list();
+}
+function list() {
+	var cardOpen = document.querySelectorAll('.open, .show');
+	if(cardOpen.length == 2) {
+		deck.removeEventListener('click', flipCard, false);
+	}
+	console.log(cardOpen);
+}
 		
 		
+	
+
+	
 
 
 /*
