@@ -27,11 +27,31 @@ function flipCard(evt) {
 }
 function list() {
 	var cardOpen = document.querySelectorAll('.open, .show');
-	if(cardOpen.length == 2) {
-		deck.removeEventListener('click', flipCard, false);
-	}
-	console.log(cardOpen);
+		if(cardOpen.length == 2) {
+			deck.removeEventListener('click', flipCard, false);
+			
+		}
+		card1 = cardOpen[0];
+		card2 = cardOpen[1];
+
+		
+		console.log(card1);
+		// function matchCard() {
+			// var card1Child = card1.childNodes[1];
+			// var card2Child = card2.childNodes[1];
+			// //card1Child.classList[1];
+			// //card2Child.classList[1];
+			 // if(card1Child.classList != card2Child.classList) {
+				// card1.classList.remove('open', 'show');
+			// }else {
+				 // card1.classList.add('match');
+			// }
+			// //console.log(card1Child.classList[1]);
+		// }
+		
 }
+
+	
 		
 		
 	
