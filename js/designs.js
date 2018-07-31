@@ -28,47 +28,36 @@ function flipCard(evt) {
 function list() {
 	var cardOpen = document.querySelectorAll('li.card.open.show');
 		if(cardOpen.length == 2) {
-			deck.removeEventListener('click', flipCard);
+			//deck.removeEventListener('click', flipCard);
+			matchCards();
 		}
-		matchCards();
+		
 }
 		
 function matchCards() {
 	var childCardOpen = document.querySelectorAll('li.card.open.show > i');
-	var childOfCard1 = childCardOpen[0];
-	var childOfCard2 = childCardOpen[1];
-	console.log(childOfCard2);
-	
-	// //Debugging so that event listener is stopped. Had to delelte remove.eventlistener and trying to get the continuation of the match game.
-	 if(childOfCard1.classList.value != childOfCard2.classList.value) {
-		 setTimeout(unmatchedCards, 1000);
-	}else {
+		if(childCardOpen[0].classList.value != childCardOpen[1].classList.value) {
+		 setTimeout(function unmatchedCards () {
+			card2 = document.querySelectorAll('li.card.open.show');
+				for(var j = 0; j <= card2.length; j++) {
+					card2[j].classList.remove('open', 'show');
+			}
+		}, 500);
+	}else if(childCardOpen[0].classList.value == childCardOpen[1].classList.value) {
 		card1 = document.querySelectorAll('li.card.open.show');
 			for(var i = 0; i <= card1.length; i++) {	
-			card1[i].classList.add('match');
+				card1[i].classList.add('match');
 			}
+	}else {
+		gameOver();
 	}
 	deck.addEventListener('click', flipCard);
-}
-function unmatchedCards() {
-	card2 = document.querySelectorAll('li.card.open.show');
-		for(var j = 0; j <= card2.length; j++) {
-			card2[j].classList.remove('open', 'show');
-		}
+	
+	 
 }
 
-deck.addEventListener('click', flipCard);		
-// function unmatchCards(card1, card2) {
-	// var childOfCard1 = card1.children[0].getAttributeNode('class').value;
-	// var childOfCard2 = card2.children[0].getAttributeNode('class').value;
-	
-	// if(childOfCard1 != childOfCard2) {
-		// card1.classList.remove('open', 'show');
-		// card2.classList.remove('open', 'show');
-	// }
-	// //deck.addEventListener('click', flipCard, false);
-	// flipCard();
-// }		
+
+deck.addEventListener('click', flipCard);			
 	
 
 	
