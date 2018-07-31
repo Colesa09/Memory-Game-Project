@@ -18,7 +18,7 @@ var card1, card2;
 var symbol;
 
 var deck = document.querySelector('.deck');
-deck.addEventListener('click', flipCard, false);
+
 
 function flipCard(evt) {
 	var card = evt.target;
@@ -26,34 +26,49 @@ function flipCard(evt) {
 	list();
 }
 function list() {
-	var cardOpen = document.querySelectorAll('.open, .show');
+	var cardOpen = document.querySelectorAll('li.card.open.show');
 		if(cardOpen.length == 2) {
-			deck.removeEventListener('click', flipCard, false);
-			
+			deck.removeEventListener('click', flipCard);
 		}
-		card1 = cardOpen[0];
-		card2 = cardOpen[1];
-
+		matchCards();
+}
 		
-		console.log(card1);
-		// function matchCard() {
-			// var card1Child = card1.childNodes[1];
-			// var card2Child = card2.childNodes[1];
-			// //card1Child.classList[1];
-			// //card2Child.classList[1];
-			 // if(card1Child.classList != card2Child.classList) {
-				// card1.classList.remove('open', 'show');
-			// }else {
-				 // card1.classList.add('match');
-			// }
-			// //console.log(card1Child.classList[1]);
-		// }
-		
+function matchCards() {
+	var childCardOpen = document.querySelectorAll('li.card.open.show > i');
+	var childOfCard1 = childCardOpen[0];
+	var childOfCard2 = childCardOpen[1];
+	console.log(childOfCard2);
+	
+	// //Debugging so that event listener is stopped. Had to delelte remove.eventlistener and trying to get the continuation of the match game.
+	 if(childOfCard1.classList.value != childOfCard2.classList.value) {
+		 setTimeout(unmatchedCards, 1000);
+	}else {
+		card1 = document.querySelectorAll('li.card.open.show');
+			for(var i = 0; i <= card1.length; i++) {	
+			card1[i].classList.add('match');
+			}
+	}
+	deck.addEventListener('click', flipCard);
+}
+function unmatchedCards() {
+	card2 = document.querySelectorAll('li.card.open.show');
+		for(var j = 0; j <= card2.length; j++) {
+			card2[j].classList.remove('open', 'show');
+		}
 }
 
+deck.addEventListener('click', flipCard);		
+// function unmatchCards(card1, card2) {
+	// var childOfCard1 = card1.children[0].getAttributeNode('class').value;
+	// var childOfCard2 = card2.children[0].getAttributeNode('class').value;
 	
-		
-		
+	// if(childOfCard1 != childOfCard2) {
+		// card1.classList.remove('open', 'show');
+		// card2.classList.remove('open', 'show');
+	// }
+	// //deck.addEventListener('click', flipCard, false);
+	// flipCard();
+// }		
 	
 
 	
