@@ -18,23 +18,30 @@ var card1, card2;
 var symbol;
 
 var deck = document.querySelector('.deck');
-
+var cards = document.querySelectorAll('li.card');
+var cardOpen = [];
+var cardsMatch = [];
 
 function flipCard(evt) {
 	var card = evt.target;
 	card.classList.add('open', 'show');
-	list();
+	cardOpen.push(card);
+	if(cardOpen.length == 2) {
+		cardOpen.forEach(matchCards());
+	}
+	//console.log(cardOpen);
+	//list();
 }
-function list() {
-	var cardOpen = document.querySelectorAll('li.card.open.show');
-		if(cardOpen.length == 2) {
-			//deck.removeEventListener('click', flipCard);
-			matchCards();
-		}
+// function list() {
+	// var cardOpen = document.querySelectorAll('li.card.open.show');
+		// if(cardOpen.length == 2) {
+			// matchCards();
+		// }
 		
-}
+// }
 		
 function matchCards() {
+	//cardOpen.
 	var childCardOpen = document.querySelectorAll('li.card.open.show > i');
 		if(childCardOpen[0].classList.value != childCardOpen[1].classList.value) {
 		 setTimeout(function unmatchedCards () {
@@ -48,14 +55,21 @@ function matchCards() {
 			for(var i = 0; i <= card1.length; i++) {	
 				card1[i].classList.add('match');
 			}
+			flipCard();
 	}else {
 		gameOver();
 	}
-	deck.addEventListener('click', flipCard);
+	//deck.addEventListener('click', flipCard);
 	
 	 
 }
 
+// function gameOver() {
+	// var allCards = document.querySelectorAll('.match');
+	// if(allCards.length == 16) {
+		
+	// }
+// }
 
 deck.addEventListener('click', flipCard);			
 	
