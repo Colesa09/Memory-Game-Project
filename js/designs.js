@@ -29,27 +29,19 @@ function flipCard(evt) {
 	if(cardOpen.length == 2) {
 		matchCards();
 	}
-	//console.log(cardOpen);
-	//list();
 }
-// function list() {
-	// var cardOpen = document.querySelectorAll('li.card.open.show');
-		// if(cardOpen.length == 2) {
-			// matchCards();
-		// }
-		
-// }
+
 		
 function matchCards() {
-	card1 = cardOpen[0].children;
-	card2 = cardOpen[1].children;
+	//card1 = cardOpen[0].children;
+	//card2 = cardOpen[1].children;
 	//console.log(card1, card2);
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
 		cardOpen[0].classList.add('match');
 		cardOpen[1].classList.add('match');
 		for(var i = 2; i > cardOpen.length; i--) {
 			//cardOpen[i].pop();
-			cardsMatch.push(cardOpen[i]);
+			cardsMatch.push(cardOpen);
 		}
 	}else {
 		setTimeout(function unmatchedCards () {
