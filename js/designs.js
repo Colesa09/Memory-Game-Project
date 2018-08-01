@@ -1,6 +1,6 @@
 //Javascript for Memory Card Game
 
-/*function shuffle(array) {
+function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -12,12 +12,13 @@
     }
 
     return array;
-}*/
+}
 
 var card1, card2;
 var symbol;
 
 var deck = document.querySelector('.deck');
+var restart = document.querySelector('.restart');
 var cards = " ";
 var cardOpen = [];
 var cardsMatch = [];
@@ -25,6 +26,7 @@ var cardsMatch = [];
 function flipCard(evt) {
 	var card = evt.target;
 	card.classList.add('open', 'show');
+	//need to start timer here
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
 		matchCards();
@@ -32,14 +34,15 @@ function flipCard(evt) {
 }
 	
 function matchCards() {
-	//card1 = cardOpen[0].children;
-	//card2 = cardOpen[1].children;
-	//console.log(card1, card2);
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
 		cardOpen[0].classList.add('match');
 		cardOpen[1].classList.add('match');
 		while( (i = cardOpen.shift()) !== undefined) {
 			cardsMatch.push(i);
+			if(cardsMatch.length == 16) {
+				setTimeout(gameOver, 1000);
+				//need to end timer here
+			}
 		}
 	}else {
 		setTimeout(function unmatchedCards () {
@@ -48,23 +51,23 @@ function matchCards() {
 					cardOpen.splice(0, 2);
 		}, 1000);
 	}
-		console.log(cardsMatch);
-		console.log(cardOpen);
-	// }else {
-		// gameOver();
-	// }
-	//deck.addEventListener('click', flipCard);
-	
-	 
 }
 
-// function gameOver() {
-	// var allCards = document.querySelectorAll('.match');
-	// if(allCards.length == 16) {
+function gameOver() {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?')) {
+		location.reload(true);
+		shuffle();
+	}
 		
-	// }
+}
+function restartGame() {
+	location.reload(true);
+	shuffle();
+}
+	
+deck.addEventListener('click', flipCard);	
+restart.addEventListener('click', restartGame);
 
-deck.addEventListener('click', flipCard);
 	
 
 	
