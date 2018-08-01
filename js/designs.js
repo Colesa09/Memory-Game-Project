@@ -18,7 +18,7 @@ var card1, card2;
 var symbol;
 
 var deck = document.querySelector('.deck');
-var cards = document.querySelectorAll('li.card');
+var cards = " ";
 var cardOpen = [];
 var cardsMatch = [];
 
@@ -30,8 +30,7 @@ function flipCard(evt) {
 		matchCards();
 	}
 }
-
-		
+	
 function matchCards() {
 	//card1 = cardOpen[0].children;
 	//card2 = cardOpen[1].children;
@@ -39,9 +38,8 @@ function matchCards() {
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
 		cardOpen[0].classList.add('match');
 		cardOpen[1].classList.add('match');
-		for(var i = 2; i > cardOpen.length; i--) {
-			//cardOpen[i].pop();
-			cardsMatch.push(cardOpen);
+		while( (i = cardOpen.shift()) !== undefined) {
+			cardsMatch.push(i);
 		}
 	}else {
 		setTimeout(function unmatchedCards () {
