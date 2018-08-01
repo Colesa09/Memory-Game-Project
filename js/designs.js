@@ -1,5 +1,14 @@
 //Javascript for Memory Card Game
 
+var card1, card2;
+
+var deck = document.querySelector('.deck');
+var restart = document.querySelector('.restart');
+var cards = document.querySelectorAll('li.card');
+var cardOpen = [];
+var cardsMatch = [];
+
+//Shuffle the cards function
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -14,15 +23,8 @@ function shuffle(array) {
     return array;
 }
 
-var card1, card2;
-var symbol;
 
-var deck = document.querySelector('.deck');
-var restart = document.querySelector('.restart');
-var cards = " ";
-var cardOpen = [];
-var cardsMatch = [];
-
+//Memory Game function
 function flipCard(evt) {
 	var card = evt.target;
 	card.classList.add('open', 'show');
@@ -49,10 +51,10 @@ function matchCards() {
 					cardOpen[0].classList.remove('open', 'show');
 					cardOpen[1].classList.remove('open', 'show');
 					cardOpen.splice(0, 2);
-		}, 1000);
+		}, 700);
 	}
 }
-
+//Game over function
 function gameOver() {
 	if(confirm('You Won! Congratulations.\nWould you like to play again?')) {
 		location.reload(true);
@@ -60,11 +62,12 @@ function gameOver() {
 	}
 		
 }
+//if the restart button is click before game over
 function restartGame() {
 	location.reload(true);
 	shuffle();
 }
-	
+//event listeners for cards on game and restart button	
 deck.addEventListener('click', flipCard);	
 restart.addEventListener('click', restartGame);
 
