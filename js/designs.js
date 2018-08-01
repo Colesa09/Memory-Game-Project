@@ -27,7 +27,7 @@ function flipCard(evt) {
 	card.classList.add('open', 'show');
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
-		cardOpen.forEach(matchCards());
+		matchCards();
 	}
 	//console.log(cardOpen);
 	//list();
@@ -41,24 +41,32 @@ function flipCard(evt) {
 // }
 		
 function matchCards() {
-	//cardOpen.
-	var childCardOpen = document.querySelectorAll('li.card.open.show > i');
-		if(childCardOpen[0].classList.value != childCardOpen[1].classList.value) {
-		 setTimeout(function unmatchedCards () {
-			card2 = document.querySelectorAll('li.card.open.show');
-				for(var j = 0; j <= card2.length; j++) {
-					card2[j].classList.remove('open', 'show');
-			}
-		}, 500);
-	}else if(childCardOpen[0].classList.value == childCardOpen[1].classList.value) {
-		card1 = document.querySelectorAll('li.card.open.show');
-			for(var i = 0; i <= card1.length; i++) {	
-				card1[i].classList.add('match');
-			}
-			flipCard();
+	card1 = cardOpen[0].children;
+	card2 = cardOpen[1].children;
+	//console.log(card1, card2);
+	if(cardOpen[0].isEqualNode(cardOpen[1])) {
+		cardOpen[0].classList.add('match');
+		cardOpen[1].classList.add('match');
+		for(var i = 2; i > cardOpen.length; i--) {
+			//cardOpen[i].pop();
+			cardsMatch.push(cardOpen[i]);
+		}
 	}else {
-		gameOver();
+		setTimeout(function unmatchedCards () {
+					cardOpen[0].classList.remove('open', 'show');
+					cardOpen[1].classList.remove('open', 'show');
+		}, 1000);
 	}
+		console.log(cardsMatch);
+		console.log(cardOpen);
+		// card1 = document.querySelectorAll('li.card.open.show');
+			// for(var i = 0; i <= card1.length; i++) {	
+				// card1[i].classList.add('match');
+			// }
+			// flipCard();
+	// }else {
+		// gameOver();
+	// }
 	//deck.addEventListener('click', flipCard);
 	
 	 
@@ -69,9 +77,8 @@ function matchCards() {
 	// if(allCards.length == 16) {
 		
 	// }
-// }
 
-deck.addEventListener('click', flipCard);			
+deck.addEventListener('click', flipCard);
 	
 
 	
