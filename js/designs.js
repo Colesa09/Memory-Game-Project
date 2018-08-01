@@ -45,15 +45,11 @@ function matchCards() {
 		setTimeout(function unmatchedCards () {
 					cardOpen[0].classList.remove('open', 'show');
 					cardOpen[1].classList.remove('open', 'show');
+					cardOpen.splice(0, 2);
 		}, 1000);
 	}
 		console.log(cardsMatch);
 		console.log(cardOpen);
-		// card1 = document.querySelectorAll('li.card.open.show');
-			// for(var i = 0; i <= card1.length; i++) {	
-				// card1[i].classList.add('match');
-			// }
-			// flipCard();
 	// }else {
 		// gameOver();
 	// }
