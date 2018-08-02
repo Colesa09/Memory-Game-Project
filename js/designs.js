@@ -5,10 +5,12 @@ var card1, card2;
 var deck = document.querySelector('.deck');
 var restart = document.querySelector('.restart');
 var cards = document.querySelectorAll('li.card');
+var newCards = [];
 var cardOpen = [];
 var cardsMatch = [];
-
+//var cardArray = Array.from(cards);
 //Shuffle the cards function
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -22,6 +24,22 @@ function shuffle(array) {
 
     return array;
 }
+
+
+
+
+function startGame() {
+	while( (j = cardsMatch.shift()) !== undefined) {
+			newCards.push(j);
+	}
+	newCards = shuffle(newCards);
+	for(var x = 0; x <= newCards.length; x++) {
+		newCards[x].classList.remove('open', 'show', 'match');
+		deck.appendChild(newCards[x]);
+	}
+	flipCard();
+}
+
 
 
 //Memory Game function
@@ -57,15 +75,13 @@ function matchCards() {
 //Game over function
 function gameOver() {
 	if(confirm('You Won! Congratulations.\nWould you like to play again?')) {
-		location.reload(true);
-		shuffle();
-	}
+		startGame();
 		
+	}	
 }
 //if the restart button is click before game over
 function restartGame() {
-	location.reload(true);
-	shuffle();
+	startGame();
 }
 //event listeners for cards on game and restart button	
 deck.addEventListener('click', flipCard);	
