@@ -9,12 +9,19 @@ var newCards = [];
 var cardOpen = [];
 var cardsMatch = [];
 
+var stars = document.querySelector('.stars').childNodes;
+
 //Tracking moves
 var count = document.querySelector('.moves');
 var movesCount = 0;
 function counter() {
 	 movesCount++;
 	count.innerHTML = movesCount;
+	if(movesCount >= 15) {
+		stars.removeChild(child);
+	}else if(movesCount > 10 && movesCount < 15) {
+		stars.removeChild(child);
+	}
 }
 
 
@@ -39,10 +46,14 @@ function shuffle(array) {
 }
 //Game is started again after win
 function startGame() {
+	movesCount = 0;
+	count.innerHTML = movesCount;
+	
 	while( (j = cardsMatch.shift()) !== undefined) {
 			newCards.push(j);
 	}
 	newCards = shuffle(newCards);
+	
 	for(var x = 0; x <= newCards.length; x++) {
 		newCards[x].classList.remove('open', 'show', 'match');
 		deck.appendChild(newCards[x]);
@@ -84,7 +95,7 @@ function matchCards() {
 }
 //Game over function
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?\n' + endTimer)) {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?\nScore: ' + movesCount +' : ' + endTimer)) {
 		startGame();
 		
 	}	
