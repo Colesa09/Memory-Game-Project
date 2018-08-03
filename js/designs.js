@@ -1,6 +1,6 @@
 //Javascript for Memory Card Game
 
-var card1, card2;
+var card1, card2, startTimer, endTimer;
 
 var deck = document.querySelector('.deck');
 var restart = document.querySelector('.restart');
@@ -8,9 +8,22 @@ var cards = document.querySelectorAll('li.card');
 var newCards = [];
 var cardOpen = [];
 var cardsMatch = [];
-//var cardArray = Array.from(cards);
-//Shuffle the cards function
 
+//Tracking moves
+var count = document.querySelector('.moves');
+var movesCount = 0;
+function counter() {
+	 movesCount++;
+	count.innerHTML = movesCount;
+}
+
+
+//needs to be a function to keep track of time
+// var d = new Date();
+// endTimer = d.getMinutes + d.getSeconds;
+
+
+//Shuffle the cards function
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -24,10 +37,7 @@ function shuffle(array) {
 
     return array;
 }
-
-
-
-
+//Game is started again after win
 function startGame() {
 	while( (j = cardsMatch.shift()) !== undefined) {
 			newCards.push(j);
@@ -39,18 +49,18 @@ function startGame() {
 	}
 	flipCard();
 }
-
-
-
 //Memory Game function
+//startTimer = setInterval(flipCard, 0);
 function flipCard(evt) {
 	var card = evt.target;
 	card.classList.add('open', 'show');
-	//need to start timer here
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
+		counter();
 		matchCards();
+		
 	}
+	
 }
 	
 function matchCards() {
@@ -61,7 +71,7 @@ function matchCards() {
 			cardsMatch.push(i);
 			if(cardsMatch.length == 16) {
 				setTimeout(gameOver, 1000);
-				//need to end timer here
+				//clearInterval(startTimer);
 			}
 		}
 	}else {
@@ -74,7 +84,7 @@ function matchCards() {
 }
 //Game over function
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?')) {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?\n' + endTimer)) {
 		startGame();
 		
 	}	
