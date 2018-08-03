@@ -113,7 +113,7 @@ function matchCards() {
 }
 //Game over function
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?\nScore: ' + movesCount +' Time: ' + endTimer)) {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount +'\nTime: ' + endTimer)) {
 		startGame();
 		
 	}	
