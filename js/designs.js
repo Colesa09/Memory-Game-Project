@@ -1,33 +1,44 @@
 //Javascript for Memory Card Game
 
-var card1, card2, startTimer, endTimer;
+var startTimer, endTimer; 
+var mins = 0; 
+var sec = 0;;
 
 var deck = document.querySelector('.deck');
 var restart = document.querySelector('.restart');
-var cards = document.querySelectorAll('li.card');
 var newCards = [];
 var cardOpen = [];
 var cardsMatch = [];
 
-var stars = document.querySelector('.stars').childNodes;
+var stars = document.querySelectorAll('.fa-star');
+var scorePanel = document.querySelector('.score-panel');
 
-//Tracking moves
+//Tracking moves & star rating
 var count = document.querySelector('.moves');
 var movesCount = 0;
 function counter() {
 	 movesCount++;
 	count.innerHTML = movesCount;
 	if(movesCount >= 15) {
-		stars.removeChild(child);
+		stars[1].style.visibility = 'hidden';
 	}else if(movesCount > 10 && movesCount < 15) {
-		stars.removeChild(child);
+		stars[0].style.visibility = 'hidden';
 	}
 }
 
 
-//needs to be a function to keep track of time
-// var d = new Date();
-// endTimer = d.getMinutes + d.getSeconds;
+//Tracking time function
+var time = document.createElement('span');
+time.setAttribute('id', 'time');
+scorePanel.insertAdjacentElement('beforeend', time);
+function timer() {
+	time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
+	sec++;
+		if(sec == 60) {
+			mins++;
+			sec = 0;
+		}
+}
 
 
 //Shuffle the cards function
@@ -48,12 +59,12 @@ function shuffle(array) {
 function startGame() {
 	movesCount = 0;
 	count.innerHTML = movesCount;
-	
+	stars[0].style.visibility = 'initial';
+	stars[1].style.visibility = 'initial';
 	while( (j = cardsMatch.shift()) !== undefined) {
 			newCards.push(j);
 	}
 	newCards = shuffle(newCards);
-	
 	for(var x = 0; x <= newCards.length; x++) {
 		newCards[x].classList.remove('open', 'show', 'match');
 		deck.appendChild(newCards[x]);
@@ -61,9 +72,10 @@ function startGame() {
 	flipCard();
 }
 //Memory Game function
-//startTimer = setInterval(flipCard, 0);
+startTimer = setInterval(timer, 1000);
 function flipCard(evt) {
 	var card = evt.target;
+	
 	card.classList.add('open', 'show');
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
@@ -71,7 +83,6 @@ function flipCard(evt) {
 		matchCards();
 		
 	}
-	
 }
 	
 function matchCards() {
@@ -82,7 +93,8 @@ function matchCards() {
 			cardsMatch.push(i);
 			if(cardsMatch.length == 16) {
 				setTimeout(gameOver, 1000);
-				//clearInterval(startTimer);
+				clearInterval(startTimer);
+				endTimer = time.textContent;
 			}
 		}
 	}else {
@@ -95,7 +107,7 @@ function matchCards() {
 }
 //Game over function
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?\nScore: ' + movesCount +' : ' + endTimer)) {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?\nScore: ' + movesCount +' Time: ' + endTimer)) {
 		startGame();
 		
 	}	
