@@ -2,7 +2,7 @@
 
 var startTimer, endTimer; 
 var mins = 0; 
-var sec = 0;;
+var sec = 0;
 
 var deck = document.querySelector('.deck');
 var restart = document.querySelector('.restart');
@@ -57,18 +57,25 @@ function shuffle(array) {
 }
 //Game is started again after win
 function startGame() {
+	//moves, star rating and timer reset
 	movesCount = 0;
 	count.innerHTML = movesCount;
 	stars[0].style.visibility = 'initial';
 	stars[1].style.visibility = 'initial';
-	while( (j = cardsMatch.shift()) !== undefined) {
-			newCards.push(j);
-	}
-	newCards = shuffle(newCards);
-	for(var x = 0; x <= newCards.length; x++) {
-		newCards[x].classList.remove('open', 'show', 'match');
-		deck.appendChild(newCards[x]);
-	}
+	document.getElementById('time').innerHTML = " ";
+	min = 0;
+	sec = 0;
+	setInterval(timer, 1000);
+	//end of moves, star and timer
+	
+		while( (j = cardsMatch.shift()) !== undefined) {
+				newCards.push(j);
+		}
+		newCards = shuffle(newCards);
+		for(var x = 0; x <= newCards.length; x++) {
+			newCards[x].classList.remove('open', 'show', 'match');
+			deck.appendChild(newCards[x]);
+		}
 	flipCard();
 }
 //Memory Game function
@@ -84,7 +91,6 @@ function flipCard(evt) {
 		
 	}
 }
-	
 function matchCards() {
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
 		cardOpen[0].classList.add('match');
