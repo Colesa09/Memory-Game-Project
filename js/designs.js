@@ -31,6 +31,7 @@ function counter() {
 var time = document.createElement('span');
 time.setAttribute('id', 'time');
 scorePanel.insertAdjacentElement('beforeend', time);
+
 function timer() {
 	time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
 	sec++;
@@ -57,6 +58,14 @@ function shuffle(array) {
 }
 //Game is started again after win
 function startGame() {
+		while( (j = cardsMatch.shift()) !== undefined) {
+				newCards.push(j);
+		}
+		newCards = shuffle(newCards);
+		for(var cards of newCards) {
+			cards.classList.remove('open', 'show', 'match');
+			deck.appendChild(cards);
+		}
 	//moves, star rating and timer reset
 	movesCount = 0;
 	count.innerHTML = movesCount;
@@ -65,17 +74,8 @@ function startGame() {
 	document.getElementById('time').innerHTML = " ";
 	min = 0;
 	sec = 0;
-	setInterval(timer, 1000);
+	//setInterval(timer, 1000);
 	//end of moves, star and timer
-	
-		while( (j = cardsMatch.shift()) !== undefined) {
-				newCards.push(j);
-		}
-		newCards = shuffle(newCards);
-		for(var x = 0; x <= newCards.length; x++) {
-			newCards[x].classList.remove('open', 'show', 'match');
-			deck.appendChild(newCards[x]);
-		}
 	flipCard();
 }
 //Memory Game function
@@ -119,12 +119,12 @@ function gameOver() {
 	}	
 }
 //if the restart button is click before game over
-function restartGame() {
-	startGame();
-}
+// function restartGame() {
+	// startGame();
+// }
 //event listeners for cards on game and restart button	
 deck.addEventListener('click', flipCard);	
-restart.addEventListener('click', restartGame);
+restart.addEventListener('click', startGame);
 
 	
 
