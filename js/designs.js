@@ -4,6 +4,7 @@ var startTimer, endTimer;
 var mins = 0; 
 var sec = 0;
 
+var cards = document.querySelectorAll('.card');
 var deck = document.querySelector('.deck');
 var restart = document.querySelector('.restart');
 var newCards = [];
@@ -31,7 +32,6 @@ function counter() {
 var time = document.createElement('span');
 time.setAttribute('id', 'time');
 scorePanel.insertAdjacentElement('beforeend', time);
-
 function timer() {
 	time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
 	sec++;
@@ -56,32 +56,7 @@ function shuffle(array) {
 
     return array;
 }
-//Game is started again after win
-function startGame() {
-		while( (j = cardsMatch.shift()) !== undefined) {
-				newCards.push(j);
-		}
-		newCards = shuffle(newCards);
-		for(var cards of newCards) {
-			cards.classList.remove('open', 'show', 'match');
-			deck.appendChild(cards);
-		}
-	//reset moves and star rating
-	movesCount = 0;
-	count.innerHTML = movesCount;
-	stars[0].style.visibility = 'initial';
-	stars[1].style.visibility = 'initial';
-	/*end of reset moves and star rating
-	
-	reset Timer*/
-	document.getElementById('time').innerHTML = " ";
-	mins = 0;
-	sec = 0;
-	timer();
-	//end of timer
-	
-	flipCard();
-}
+
 //Memory Game function
 startTimer = setInterval(timer, 1000);
 function flipCard(evt) {
@@ -116,7 +91,7 @@ function matchCards() {
 }
 //Game over function
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount +'\nTime: ' + endTimer)) {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount + ' -Star Rating: ' + stars + '\nTime: ' + endTimer)) {
 		startGame();
 		
 	}	
@@ -125,8 +100,35 @@ function gameOver() {
 //event listeners for cards on game and restart button	
 deck.addEventListener('click', flipCard);	
 restart.addEventListener('click', startGame);
+/*
 
+
+Game is started again after win*/
+function startGame() {
+		cardsMatch = shuffle(cardsMatch);
+		cards = cardsMatch;
+		for(var card of cards) {
+			card.classList.remove('open', 'show', 'match');
+			deck.appendChild(card);
+		}
+		cardsMatch= [];
 	
+	//reset moves and star rating
+	movesCount = 0;
+	count.innerHTML = movesCount;
+	stars[0].style.visibility = 'initial';
+	stars[1].style.visibility = 'initial';
+	/*end of reset moves and star rating
+	
+	reset Timer*/
+	document.getElementById('time').innerHTML = " ";
+	mins = 0;
+	sec = 0;
+	timer();
+	//end of timer
+	
+	flipCard(deck);
+}	
 
 	
 
