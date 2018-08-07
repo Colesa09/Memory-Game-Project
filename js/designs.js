@@ -121,10 +121,7 @@ function gameOver() {
 		
 	}	
 }
-//if the restart button is click before game over
-// function restartGame() {
-	// startGame();
-// }
+
 //event listeners for cards on game and restart button	
 deck.addEventListener('click', flipCard);	
 restart.addEventListener('click', startGame);
