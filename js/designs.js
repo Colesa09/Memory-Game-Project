@@ -66,23 +66,26 @@ function startGame() {
 			cards.classList.remove('open', 'show', 'match');
 			deck.appendChild(cards);
 		}
-	//moves, star rating and timer reset
+	//reset moves and star rating
 	movesCount = 0;
 	count.innerHTML = movesCount;
 	stars[0].style.visibility = 'initial';
 	stars[1].style.visibility = 'initial';
+	/*end of reset moves and star rating
+	
+	reset Timer*/
 	document.getElementById('time').innerHTML = " ";
-	min = 0;
+	mins = 0;
 	sec = 0;
-	//setInterval(timer, 1000);
-	//end of moves, star and timer
+	timer();
+	//end of timer
+	
 	flipCard();
 }
 //Memory Game function
 startTimer = setInterval(timer, 1000);
 function flipCard(evt) {
 	var card = evt.target;
-	
 	card.classList.add('open', 'show');
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
