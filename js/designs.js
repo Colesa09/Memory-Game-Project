@@ -1,9 +1,5 @@
 //Javascript for Memory Card Game
 
-var startTimer, endTimer; 
-var mins = 0; 
-var sec = 0;
-
 var cards = document.querySelectorAll('.card');
 var deck = document.querySelector('.deck');
 var restart = document.querySelector('.restart');
@@ -11,54 +7,22 @@ var newCards = [];
 var cardOpen = [];
 var cardsMatch = [];
 
+var startTimer, endTimer; 
+var mins = 0; 
+var sec = 0;
+
 var stars = document.querySelectorAll('.fa-star');
 var starRating = stars.className;
-var scorePanel = document.querySelector('.score-panel');
 
-//Tracking moves & star rating
-var count = document.querySelector('.moves');
-var movesCount = 0;
-function counter() {
-	 movesCount++;
-	count.innerHTML = movesCount;
-	if(movesCount >= 17) {
-		stars[1].style.visibility = 'hidden';
-	}else if(movesCount > 12 && movesCount < 17) {
-		stars[0].style.visibility = 'hidden';
-	}
-}
-
-
-//Tracking time function
 var time = document.createElement('span');
+var scorePanel = document.querySelector('.score-panel');
 time.setAttribute('id', 'time');
 scorePanel.insertAdjacentElement('beforeend', time);
-function timer() {
-	time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
-	sec++;
-		if(sec == 60) {
-			mins++;
-			sec = 0;
-		}
-}
 
 
-//Shuffle the cards function
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-//Memory Game function
+/*
+ *
+/*Original function that start matching game */
 startTimer = setInterval(timer, 1000);
 function flipCard(evt) {
 	var card = evt.target;
@@ -90,13 +54,59 @@ function matchCards() {
 		}, 700);
 	}
 }
-//Game over function
+/*End of original function that starts matching game*/
+/*
+/*
+/*Tracking moves made and calculates the star rating */
+var count = document.querySelector('.moves');
+var movesCount = 0;
+function counter() {
+	 movesCount++;
+	count.innerHTML = movesCount;
+	if(movesCount >= 17) {
+		stars[1].style.visibility = 'hidden';
+	}else if(movesCount > 12 && movesCount < 17) {
+		stars[0].style.visibility = 'hidden';
+	}
+}
+/*
+ *
+/*Tracking time function */
+function timer() {
+	time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
+	sec++;
+	if(sec == 60) {
+		mins++;
+		sec = 0;
+	}
+}
+/*
+ *
+/*Function that displays alert when winner wins the game */
 function gameOver() {
 	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount + ' -Star Rating: ' + starRating + '\nTime: ' + endTimer)) {
 		startGame();
-		
 	}	
 }
+/*
+ *
+/*Function that shuffle cards */
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+/*
+ *
+/*Function that starts game when the restart button is clicked */
 function restartGame() {
 	newCards = [...cards];
 	newCards = shuffle(newCards);
@@ -120,10 +130,8 @@ function restartGame() {
 	//startTimer = setInterval(timer, 1000);
 	//end of timer
 }
-
-
 /*
-/*
+ *
 /*Function that starts game after wins*/
 function startGame() {
 	cardsMatch = shuffle(cardsMatch);
@@ -149,11 +157,10 @@ function startGame() {
 	timer();
 	startTimer = setInterval(timer, 1000);
 	//end of timer
-	
-	//flipCard();
 }	
-
-//event listeners for cards on game and restart button	
+/*
+ *
+/*Event Listeners for deck of cards and restart button*/
 deck.addEventListener('click', flipCard);	
 restart.addEventListener('click', restartGame);	
 
