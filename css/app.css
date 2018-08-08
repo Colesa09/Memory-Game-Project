@@ -108,3 +108,23 @@ h1 {
     float: right;
     cursor: pointer;
 }
+/*
+ * Displaying Game Over
+ */
+ #alert {
+	 display: none;
+	 position: fixed;
+	 margin: auto;
+	 width: 70%;
+	 height: 70%;
+	 background: linear-gradient(160deg, #ffffff 0%, #cc0214 100%);
+	 text-align: center;
+	 background-color: rgba(0,0,0,0.5);
+ }
+ .alertText {
+	 width: 90%;
+	 font-size: 20px;
+	 margin: auto;
+	 padding: 20px, 5px;
+	 
+ }
