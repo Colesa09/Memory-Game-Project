@@ -21,9 +21,9 @@ var movesCount = 0;
 function counter() {
 	 movesCount++;
 	count.innerHTML = movesCount;
-	if(movesCount >= 15) {
+	if(movesCount >= 17) {
 		stars[1].style.visibility = 'hidden';
-	}else if(movesCount > 10 && movesCount < 15) {
+	}else if(movesCount > 12 && movesCount < 17) {
 		stars[0].style.visibility = 'hidden';
 	}
 }
@@ -97,10 +97,14 @@ function gameOver() {
 		
 	}	
 }
+function restartGame() {
+		flipCard();
+			
+}
 
 //event listeners for cards on game and restart button	
 deck.addEventListener('click', flipCard);	
-restart.addEventListener('click', startGame);
+restart.addEventListener('click', restartGame);
 /*
 
 
