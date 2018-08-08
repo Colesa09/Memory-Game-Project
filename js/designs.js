@@ -12,6 +12,7 @@ var cardOpen = [];
 var cardsMatch = [];
 
 var stars = document.querySelectorAll('.fa-star');
+var starRating = stars.className;
 var scorePanel = document.querySelector('.score-panel');
 
 //Tracking moves & star rating
@@ -91,7 +92,7 @@ function matchCards() {
 }
 //Game over function
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount + ' -Star Rating: ' + stars + '\nTime: ' + endTimer)) {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount + ' -Star Rating: ' + starRating + '\nTime: ' + endTimer)) {
 		startGame();
 		
 	}	
@@ -105,14 +106,15 @@ restart.addEventListener('click', startGame);
 
 Game is started again after win*/
 function startGame() {
-		cardsMatch = shuffle(cardsMatch);
-		cards = cardsMatch;
-		for(var card of cards) {
-			card.classList.remove('open', 'show', 'match');
-			deck.appendChild(card);
+	cardsMatch = shuffle(cardsMatch);
+		for(var c = 0; c < cards.length; c++) {
+			cards[c].remove();
 		}
-		cardsMatch= [];
-	
+		for(var x = 0; x < cardsMatch.length; x++) {
+			cardsMatch[x].classList.remove('open', 'show', 'match');
+			deck.appendChild(cardsMatch[x]);
+		}
+		cardsMatch = [];		
 	//reset moves and star rating
 	movesCount = 0;
 	count.innerHTML = movesCount;
@@ -125,9 +127,10 @@ function startGame() {
 	mins = 0;
 	sec = 0;
 	timer();
+	startTimer = setInterval(timer, 1000);
 	//end of timer
 	
-	flipCard(deck);
+	//flipCard();
 }	
 
 	
