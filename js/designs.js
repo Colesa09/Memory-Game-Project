@@ -98,17 +98,33 @@ function gameOver() {
 	}	
 }
 function restartGame() {
-		flipCard();
-			
+	newCards = [...cards];
+	newCards = shuffle(newCards);
+	for(var y = 0; y < newCards.length; y++) {
+		newCards[y].classList.remove('open', 'show', 'match');
+		deck.appendChild(newCards[y]);
+	}
+	newCards = [];	
+	//reset moves and star rating
+	movesCount = 0;
+	count.innerHTML = movesCount;
+	stars[0].style.visibility = 'initial';
+	stars[1].style.visibility = 'initial';
+	/*end of reset moves and star rating
+	
+	reset Timer*/
+	document.getElementById('time').innerHTML = " ";
+	mins = 0;
+	sec = 0;
+	timer();
+	//startTimer = setInterval(timer, 1000);
+	//end of timer
 }
 
-//event listeners for cards on game and restart button	
-deck.addEventListener('click', flipCard);	
-restart.addEventListener('click', restartGame);
+
 /*
-
-
-Game is started again after win*/
+/*
+/*Function that starts game after wins*/
 function startGame() {
 	cardsMatch = shuffle(cardsMatch);
 		for(var c = 0; c < cards.length; c++) {
@@ -137,7 +153,9 @@ function startGame() {
 	//flipCard();
 }	
 
-	
+//event listeners for cards on game and restart button	
+deck.addEventListener('click', flipCard);	
+restart.addEventListener('click', restartGame);	
 
 
 /*
