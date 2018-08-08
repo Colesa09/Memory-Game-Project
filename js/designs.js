@@ -12,14 +12,17 @@ var mins = 0;
 var sec = 0;
 
 var stars = document.querySelectorAll('.fa-star');
-var starRating = stars.className;
+var star;
+function displayStars() {
+	for(var s = 0; s < stars.length; s++) {
+		star.appendChild(stars[s]);
+	}
+}
 
 var time = document.createElement('span');
 var scorePanel = document.querySelector('.score-panel');
 time.setAttribute('id', 'time');
 scorePanel.insertAdjacentElement('beforeend', time);
-
-
 /*
  *
 /*Original function that start matching game */
@@ -83,8 +86,14 @@ function timer() {
 /*
  *
 /*Function that displays alert when winner wins the game */
+function displayAlert() {
+	var done = document.getElementById('alert');
+	var displayRank = document.createElement('p');
+	displayRank.textConent = "Number of Moves: " + movesCount + "\nStar Rating; " + star + "\nFinished Time: " + endTimer;
+	done.appendChild(displayRank);
+}
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount + ' -Star Rating: ' + starRating + '\nTime: ' + endTimer)) {
+	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount + ' -Star Rating: ' + star + '\nTime: ' + endTimer)) {
 		startGame();
 	}	
 }
