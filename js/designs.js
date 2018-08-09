@@ -86,16 +86,27 @@ function timer() {
 /*
  *
 /*Function that displays alert when winner wins the game */
+var alertBox = document.getElementById('modal');
+var playAgain = document.getElementById('playAgain');
+var message = document.querySelector('.alertModal');
+
 function displayAlert() {
-	var done = document.getElementById('alert');
 	var displayRank = document.createElement('p');
+	displayRank.setAttribute('class', 'alertText');
 	displayRank.textConent = "Number of Moves: " + movesCount + "\nStar Rating; " + star + "\nFinished Time: " + endTimer;
-	done.appendChild(displayRank);
+	message.insertAdjacentElement('beforeend', displayRank);
 }
 function gameOver() {
-	if(confirm('You Won! Congratulations.\nWould you like to play again?\nMoves: ' + movesCount + ' -Star Rating: ' + star + '\nTime: ' + endTimer)) {
+	if(alertBox.classList == 'modal') {
+	alertBox.style.display = 'block';
+	displayAlert();
+	}
+	playAgain.addEventListener('click', function() {
+		if(event.target == this) {
+			alertBox.style.display = 'none';
+		}
 		startGame();
-	}	
+	});
 }
 /*
  *
