@@ -13,7 +13,9 @@ var mins = 0;
 var sec = 0;
 
 var stars = document.querySelectorAll('.fa-star');
-var star = [];
+var allStars = document.querySelector('.stars');
+var starRating = allStars.innerHTML;
+
 
 var time = document.createElement('span');
 var scorePanel = document.querySelector('.score-panel');
@@ -93,7 +95,7 @@ var displayRank = document.createElement('p');
 
 function displayAlert() {
 	displayRank.setAttribute('class', 'alertText');
-	displayRank.innerHTML = "Number of Moves: " + movesCount + "<br>Star Rating: " + star.length + ' stars' + "<br>Finished Time: " + endTimer;
+	displayRank.innerHTML = "Number of Moves: " + movesCount + "<br>Star Rating: " + starRating  + "<br>Finished Time: " + endTimer;
 	message.appendChild(displayRank);
 }
 /*
@@ -152,7 +154,6 @@ function restartGame() {
 	mins = 0;
 	sec = 0;
 	timer();
-	flipCard(evt);
 	//end of timer
 }
 /*
