@@ -12,12 +12,7 @@ var mins = 0;
 var sec = 0;
 
 var stars = document.querySelectorAll('.fa-star');
-var star;
-function displayStars() {
-	for(var s = 0; s < stars.length; s++) {
-		star.appendChild(stars[s]);
-	}
-}
+var star = [];
 
 var time = document.createElement('span');
 var scorePanel = document.querySelector('.score-panel');
@@ -26,16 +21,19 @@ scorePanel.insertAdjacentElement('beforeend', time);
 /*
  *
 /*Original function that start matching game */
-startTimer = setInterval(timer, 1000);
+
+timer();
 function flipCard(evt) {
-	var card = evt.target;
-	card.classList.add('open', 'show');
-	cardOpen.push(card);
+	
+	//var card = evt.target;
+	//card.classList.add('open', 'show');
+	//cardOpen.push(card);
 	if(cardOpen.length == 2) {
 		counter();
 		matchCards();
 		
 	}
+	
 }
 function matchCards() {
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
@@ -76,12 +74,14 @@ function counter() {
  *
 /*Tracking time function */
 function timer() {
-	time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
-	sec++;
-	if(sec == 60) {
-		mins++;
-		sec = 0;
-	}
+	startTimer = setInterval(function() {
+		time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
+		sec++;
+		if(sec == 60) {
+			mins++;
+			sec = 0;
+		}
+	}, 1000);
 }
 /*
  *
@@ -89,13 +89,16 @@ function timer() {
 var alertBox = document.getElementById('modal');
 var playAgain = document.getElementById('playAgain');
 var message = document.querySelector('.alertModal');
+var displayRank = document.createElement('p');
 
 function displayAlert() {
-	var displayRank = document.createElement('p');
 	displayRank.setAttribute('class', 'alertText');
-	displayRank.textConent = "Number of Moves: " + movesCount + "\nStar Rating; " + star + "\nFinished Time: " + endTimer;
-	message.insertAdjacentElement('beforeend', displayRank);
+	displayRank.innerHTML = "Number of Moves: " + movesCount + "<br>Star Rating: " + star.length + ' stars' + "<br>Finished Time: " + endTimer;
+	message.appendChild(displayRank);
 }
+/*
+ *
+/*Game over function when player has won the game */
 function gameOver() {
 	if(alertBox.classList == 'modal') {
 	alertBox.style.display = 'block';
@@ -104,6 +107,7 @@ function gameOver() {
 	playAgain.addEventListener('click', function() {
 		if(event.target == this) {
 			alertBox.style.display = 'none';
+			displayRank.innerHTML = " ";
 		}
 		startGame();
 	});
@@ -143,25 +147,24 @@ function restartGame() {
 	/*end of reset moves and star rating
 	
 	reset Timer*/
+	clearInterval(startTimer);
 	document.getElementById('time').innerHTML = " ";
 	mins = 0;
 	sec = 0;
 	timer();
-	//startTimer = setInterval(timer, 1000);
 	//end of timer
 }
 /*
  *
 /*Function that starts game after wins*/
 function startGame() {
+	if(cardsMatch.length == 16) {
 	cardsMatch = shuffle(cardsMatch);
-		for(var c = 0; c < cards.length; c++) {
-			cards[c].remove();
-		}
 		for(var x = 0; x < cardsMatch.length; x++) {
 			cardsMatch[x].classList.remove('open', 'show', 'match');
 			deck.appendChild(cardsMatch[x]);
 		}
+	}
 		cardsMatch = [];		
 	//reset moves and star rating
 	movesCount = 0;
@@ -175,8 +178,8 @@ function startGame() {
 	mins = 0;
 	sec = 0;
 	timer();
-	startTimer = setInterval(timer, 1000);
 	//end of timer
+	
 }	
 /*
  *
