@@ -1,6 +1,7 @@
 //Javascript for Memory Card Game
 
 var cards = document.querySelectorAll('.card');
+var card = [...cards];
 var deck = document.querySelector('.deck');
 var restart = document.querySelector('.restart');
 var newCards = [];
@@ -24,10 +25,9 @@ scorePanel.insertAdjacentElement('beforeend', time);
 
 timer();
 function flipCard(evt) {
-	
-	//var card = evt.target;
-	//card.classList.add('open', 'show');
-	//cardOpen.push(card);
+	card = evt.target;
+	card.classList.add('open', 'show');
+	cardOpen.push(card);
 	if(cardOpen.length == 2) {
 		counter();
 		matchCards();
@@ -152,6 +152,7 @@ function restartGame() {
 	mins = 0;
 	sec = 0;
 	timer();
+	flipCard(evt);
 	//end of timer
 }
 /*
