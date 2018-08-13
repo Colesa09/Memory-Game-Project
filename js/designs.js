@@ -36,11 +36,12 @@ function flipCard(evt) {
 		
 	}
 	
+	
 }
 function matchCards() {
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
-		cardOpen[0].classList.add('match');
-		cardOpen[1].classList.add('match');
+		cardOpen[0].classList.add('match', 'disabled');
+		cardOpen[1].classList.add('match', 'disabled');
 		while( (i = cardOpen.shift()) !== undefined) {
 			cardsMatch.push(i);
 			if(cardsMatch.length == 16) {
@@ -137,7 +138,7 @@ function restartGame() {
 	newCards = [...cards];
 	newCards = shuffle(newCards);
 	for(var y = 0; y < newCards.length; y++) {
-		newCards[y].classList.remove('open', 'show', 'match');
+		newCards[y].classList.remove('open', 'show', 'disabled', 'match');
 		deck.appendChild(newCards[y]);
 	}
 	newCards = [];	
@@ -163,7 +164,7 @@ function startGame() {
 	if(cardsMatch.length == 16) {
 	cardsMatch = shuffle(cardsMatch);
 		for(var x = 0; x < cardsMatch.length; x++) {
-			cardsMatch[x].classList.remove('open', 'show', 'match');
+			cardsMatch[x].classList.remove('open', 'show', 'disabled', 'match');
 			deck.appendChild(cardsMatch[x]);
 		}
 	}
@@ -186,7 +187,10 @@ function startGame() {
 /*
  *
 /*Event Listeners for deck of cards and restart button*/
-deck.addEventListener('click', flipCard);	
+for(var c = 0; c < cards.length; c++) {
+	cards[c].addEventListener('click', flipCard, false);
+}
+//deck.addEventListener('click', flipCard, true);	
 restart.addEventListener('click', restartGame);	
 
 
