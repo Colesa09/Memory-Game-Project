@@ -9,7 +9,7 @@ Cards with corresponding symbols are match and stayed flipped.
 Cards that do not have matching symbols are flipped back over.
 
 ##ScreenShot
-![memorygame][img/memorygame.jpeg?raw= true>
+![Uploading image.png…]()
 
 
 
