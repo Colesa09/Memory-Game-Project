@@ -27,7 +27,7 @@ scorePanel.insertAdjacentElement('beforeend', time);
 
 timer();
 function flipCard(evt) {
-	card = evt.target;
+	card = evt.currentTarget;
 	card.classList.add('open', 'show');
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
@@ -189,8 +189,7 @@ function startGame() {
 /*Event Listeners for deck of cards and restart button*/
 for(var c = 0; c < cards.length; c++) {
 	cards[c].addEventListener('click', flipCard, false);
-}
-//deck.addEventListener('click', flipCard, true);	
+}	
 restart.addEventListener('click', restartGame);	
 
 
