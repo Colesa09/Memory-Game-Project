@@ -14,7 +14,7 @@ var sec = 0;
 
 var stars = document.querySelectorAll('.fa-star');
 var allStars = document.querySelector('.stars');
-var starRating = allStars.innerHTML;
+var starRating;
 
 
 var time = document.createElement('span');
@@ -24,19 +24,15 @@ scorePanel.insertAdjacentElement('beforeend', time);
 /*
  *
 /*Original function that start matching game */
-
-timer();
+startTimer = setInterval(timer, 1000); 
 function flipCard(evt) {
 	card = evt.currentTarget;
 	card.classList.add('open', 'show', 'disabled');
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
 		counter();
-		matchCards();
-		
-	}
-	
-	
+		matchCards();	
+	}	
 }
 function matchCards() {
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
@@ -77,14 +73,12 @@ function counter() {
  *
 /*Tracking time function */
 function timer() {
-	startTimer = setInterval(function() {
 		time.innerHTML = mins + ' :minutes ' + sec + ' :seconds';
 		sec++;
 		if(sec == 60) {
 			mins++;
 			sec = 0;
 		}
-	}, 1000);
 }
 /*
  *
@@ -95,6 +89,7 @@ var message = document.querySelector('.alertModal');
 var displayRank = document.createElement('p');
 
 function displayAlert() {
+	starRating = allStars.innerHTML;
 	displayRank.setAttribute('class', 'alertText');
 	displayRank.innerHTML = "Number of Moves: " + movesCount + "<br>Star Rating: " + starRating  + "<br>Finished Time: " + endTimer;
 	message.appendChild(displayRank);
@@ -113,6 +108,8 @@ function gameOver() {
 			displayRank.innerHTML = " ";
 		}
 		startGame();
+		clearInterval(startTimer);
+		startTimer = setInterval(timer, 1000); 
 	});
 }
 /*
@@ -155,7 +152,6 @@ function restartGame() {
 	document.getElementById('time').innerHTML = " ";
 	mins = 0;
 	sec = 0;
-	timer();
 	//end of timer
 }
 /*
@@ -181,7 +177,6 @@ function startGame() {
 	document.getElementById('time').innerHTML = " ";
 	mins = 0;
 	sec = 0;
-	//timer();
 	//end of timer
 }	
 /*
