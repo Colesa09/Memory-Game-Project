@@ -141,7 +141,8 @@ function restartGame() {
 		newCards[y].classList.remove('open', 'show', 'disabled', 'match');
 		deck.appendChild(newCards[y]);
 	}
-	newCards = [];	
+	newCards = [];
+	cardOpen = [];
 	//reset moves and star rating
 	movesCount = 0;
 	count.innerHTML = movesCount;
@@ -168,7 +169,7 @@ function startGame() {
 			deck.appendChild(cardsMatch[x]);
 		}
 	}
-		cardsMatch = [];		
+		cardsMatch = [];	
 	//reset moves and star rating
 	movesCount = 0;
 	count.innerHTML = movesCount;
@@ -180,13 +181,12 @@ function startGame() {
 	document.getElementById('time').innerHTML = " ";
 	mins = 0;
 	sec = 0;
-	timer();
+	//timer();
 	//end of timer
-	
 }	
 /*
  *
-/*Event Listeners for deck of cards and restart button*/
+/*Event Listeners for cards and restart button*/
 for(var c = 0; c < cards.length; c++) {
 	cards[c].addEventListener('click', flipCard, false);
 }	
