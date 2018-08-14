@@ -28,7 +28,7 @@ scorePanel.insertAdjacentElement('beforeend', time);
 timer();
 function flipCard(evt) {
 	card = evt.currentTarget;
-	card.classList.add('open', 'show');
+	card.classList.add('open', 'show', 'disabled');
 	cardOpen.push(card);
 	if(cardOpen.length == 2) {
 		counter();
@@ -40,8 +40,8 @@ function flipCard(evt) {
 }
 function matchCards() {
 	if(cardOpen[0].isEqualNode(cardOpen[1])) {
-		cardOpen[0].classList.add('match', 'disabled');
-		cardOpen[1].classList.add('match', 'disabled');
+		cardOpen[0].classList.add('match');
+		cardOpen[1].classList.add('match');
 		while( (i = cardOpen.shift()) !== undefined) {
 			cardsMatch.push(i);
 			if(cardsMatch.length == 16) {
@@ -52,8 +52,8 @@ function matchCards() {
 		}
 	}else {
 		setTimeout(function unmatchedCards () {
-					cardOpen[0].classList.remove('open', 'show');
-					cardOpen[1].classList.remove('open', 'show');
+					cardOpen[0].classList.remove('open', 'show', 'disabled');
+					cardOpen[1].classList.remove('open', 'show', 'disabled');
 					cardOpen.splice(0, 2);
 		}, 700);
 	}
